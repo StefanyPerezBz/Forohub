@@ -1,9 +1,11 @@
-package com.forohub.forohub.domain.topico;
+package com.forohub.forohub.controller;
 
-import com.forohub.forohub.domain.topico.dto.DatosActualizarTopico;
-import com.forohub.forohub.domain.topico.dto.DatosCrearTopico;
-import com.forohub.forohub.domain.topico.dto.DatosListadoTopico;
-import com.forohub.forohub.domain.topico.dto.DatosRespuestaTopico;
+import com.forohub.forohub.dto.ActualizarTopicoDTO;
+import com.forohub.forohub.dto.CrearTopicoDTO;
+import com.forohub.forohub.dto.ListadoTopicoDTO;
+import com.forohub.forohub.dto.RespuestaTopicoDTO;
+import com.forohub.forohub.service.TopicoService;
+
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,27 +27,27 @@ public class TopicoController {
     private TopicoService topicoService;
 
     @PostMapping
-    public ResponseEntity<DatosRespuestaTopico> crearTopico(
-            @RequestBody @Valid DatosCrearTopico datos,
+    public ResponseEntity<RespuestaTopicoDTO> crearTopico(
+            @RequestBody @Valid CrearTopicoDTO datos,
             UriComponentsBuilder uriComponentsBuilder) {
-        DatosRespuestaTopico respuesta = topicoService.crearTopico(datos);
+        RespuestaTopicoDTO respuesta = topicoService.crearTopico(datos);
         URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(respuesta.id()).toUri();
         return ResponseEntity.created(url).body(respuesta);
     }
 
     @GetMapping
-    public ResponseEntity<Page<DatosListadoTopico>> listarTopicos(
+    public ResponseEntity<Page<ListadoTopicoDTO>> listarTopicos(
             @PageableDefault(size = 10, sort = {"fechaCreacion"}) Pageable paginacion) {
         return ResponseEntity.ok(topicoService.listarTopicos(paginacion));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DatosRespuestaTopico> obtenerTopicoPorId(@PathVariable Long id) {
+    public ResponseEntity<RespuestaTopicoDTO> obtenerTopicoPorId(@PathVariable Long id) {
         return ResponseEntity.ok(topicoService.obtenerTopicoPorId(id));
     }
 
     @GetMapping("/curso")
-    public ResponseEntity<Page<DatosListadoTopico>> listarTopicosPorCursoYAnio(
+    public ResponseEntity<Page<ListadoTopicoDTO>> listarTopicosPorCursoYAnio(
             @RequestParam String nombreCurso,
             @RequestParam Integer anio,
             @PageableDefault(size = 10) Pageable paginacion) {
@@ -54,8 +56,8 @@ public class TopicoController {
 
     @PutMapping
     @Transactional
-    public ResponseEntity<DatosRespuestaTopico> actualizarTopico(
-            @RequestBody @Valid DatosActualizarTopico datos) {
+    public ResponseEntity<RespuestaTopicoDTO> actualizarTopico(
+            @RequestBody @Valid ActualizarTopicoDTO datos) {
         return ResponseEntity.ok(topicoService.actualizarTopico(datos));
     }
 

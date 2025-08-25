@@ -1,10 +1,10 @@
-package com.forohub.forohub.domain.topico.dto;
-
-import com.forohub.forohub.domain.topico.Topico;
+package com.forohub.forohub.dto;
 
 import java.time.LocalDateTime;
 
-public record DatosListadoTopico(
+import com.forohub.forohub.model.Topico;
+
+public record RespuestaTopicoDTO(
         Long id,
         String titulo,
         String mensaje,
@@ -13,7 +13,7 @@ public record DatosListadoTopico(
         String autor,
         String curso
 ) {
-    public DatosListadoTopico(Topico topico) {
+    public RespuestaTopicoDTO(Topico topico) {
         this(
                 topico.getId(),
                 topico.getTitulo(),

@@ -1,8 +1,8 @@
-package com.forohub.forohub.domain.topico;
+package com.forohub.forohub.model;
 
-import com.forohub.forohub.domain.curso.Curso;
-import com.forohub.forohub.domain.topico.dto.DatosActualizarTopico;
-import com.forohub.forohub.domain.usuario.Usuario;
+import com.forohub.forohub.domain.topico.EstadoTopico;
+import com.forohub.forohub.dto.ActualizarTopicoDTO;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -54,7 +54,7 @@ public class Topico {
         this.curso = curso;
     }
 
-    public void actualizarDatos(DatosActualizarTopico datosActualizarTopico) {
+    public void actualizarDatos(ActualizarTopicoDTO datosActualizarTopico) {
         if (datosActualizarTopico.titulo() != null) {
             this.titulo = datosActualizarTopico.titulo();
         }

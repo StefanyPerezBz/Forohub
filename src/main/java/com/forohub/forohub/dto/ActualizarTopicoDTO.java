@@ -1,9 +1,9 @@
-package com.forohub.forohub.domain.topico.dto;
+package com.forohub.forohub.dto;
 
 import com.forohub.forohub.domain.topico.EstadoTopico;
 import jakarta.validation.constraints.NotNull;
 
-public record DatosActualizarTopico(
+public record ActualizarTopicoDTO(
         @NotNull
         Long id,
         String titulo,

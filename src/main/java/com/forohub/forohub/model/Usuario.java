@@ -1,4 +1,4 @@
-package com.forohub.forohub.domain.usuario;
+package com.forohub.forohub.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

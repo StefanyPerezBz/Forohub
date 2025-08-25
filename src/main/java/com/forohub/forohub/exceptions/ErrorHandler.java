@@ -1,4 +1,4 @@
-package com.forohub.forohub.infra.exceptions;
+package com.forohub.forohub.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class TratadorDeErrores {
+public class ErrorHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity tratarError404() {
         return ResponseEntity.notFound().build();
@@ -20,7 +20,7 @@ public class TratadorDeErrores {
         return ResponseEntity.badRequest().body(errores);
     }
 
-    @ExceptionHandler(ValidacionDeIntegridad.class)
+    @ExceptionHandler(IntegrityValidation.class)
     public ResponseEntity errorHandlerValidacionesDeIntegridad(Exception e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }

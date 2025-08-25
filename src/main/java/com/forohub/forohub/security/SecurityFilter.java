@@ -1,6 +1,8 @@
-package com.forohub.forohub.infra.security;
+package com.forohub.forohub.security;
 
-import com.forohub.forohub.domain.usuario.UsuarioRepository;
+import com.forohub.forohub.repository.UsuarioRepository;
+import com.forohub.forohub.service.TokenService;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,8 +1,8 @@
-package com.forohub.forohub.infra.security.dto;
+package com.forohub.forohub.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record DatosAutenticacionUsuario(
+public record AutenticacionUsuarioDTO(
         @NotBlank
         String email,
         @NotBlank

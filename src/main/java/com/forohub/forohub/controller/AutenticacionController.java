@@ -1,9 +1,11 @@
-package com.forohub.forohub.infra.security;
+package com.forohub.forohub.controller;
 
-import com.forohub.forohub.domain.usuario.Usuario;
-import com.forohub.forohub.domain.usuario.UsuarioRepository;
-import com.forohub.forohub.infra.security.dto.DatosAutenticacionUsuario;
-import com.forohub.forohub.infra.security.dto.DatosJWTToken;
+import com.forohub.forohub.dto.AutenticacionUsuarioDTO;
+import com.forohub.forohub.dto.JWTTokenDTO;
+import com.forohub.forohub.model.Usuario;
+import com.forohub.forohub.repository.UsuarioRepository;
+import com.forohub.forohub.service.TokenService;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +30,11 @@ public class AutenticacionController {
     private UsuarioRepository usuarioRepository;
 
     @PostMapping
-    public ResponseEntity<DatosJWTToken> autenticarUsuario(@RequestBody @Valid DatosAutenticacionUsuario datos) {
+    public ResponseEntity<JWTTokenDTO> autenticarUsuario(@RequestBody @Valid AutenticacionUsuarioDTO datos) {
         Authentication authToken = new UsernamePasswordAuthenticationToken(
                 datos.email(), datos.contrasena());
         var usuarioAutenticado = authenticationManager.authenticate(authToken);
         var JWTtoken = tokenService.generarToken((Usuario) usuarioAutenticado.getPrincipal());
-        return ResponseEntity.ok(new DatosJWTToken(JWTtoken));
+        return ResponseEntity.ok(new JWTTokenDTO(JWTtoken));
     }
 }
